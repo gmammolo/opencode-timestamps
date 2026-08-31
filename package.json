@@ -1,0 +1,34 @@
+{
+  "name": "opencode-timestamps",
+  "version": "0.1.0",
+  "description": "OpenCode TUI plugin: live sidebar timeline showing the start time of each user message, thinking block, response, and tool call.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./tui": "./src/tui.tsx"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "opencode",
+    "plugin",
+    "tui",
+    "timestamp",
+    "timeline",
+    "thinking",
+    "toolcall"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "latest",
+    "@opentui/core": "latest",
+    "@opentui/solid": "latest",
+    "solid-js": "latest",
+    "typescript": "latest"
+  }
+}
