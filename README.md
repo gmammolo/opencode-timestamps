@@ -30,36 +30,47 @@ Each operation type maps to a phase of the message-writing process:
 
 ## Install
 
-### From npm
+This plugin is **TUI-only** and installs directly from [GitHub](https://github.com/gmammolo/opencode-timestamps) — no npm package required.
 
-```bash
-npm i opencode-timestamps
-```
+### From GitHub (recommended)
 
-Add it to your TUI plugin list. For a global install, edit `~/.config/opencode/opencode.json`:
+Add the plugin to the `plugin` list of your TUI config (`~/.config/opencode/tui.json`) using the `github:` specifier:
 
 ```json
 {
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-timestamps"]
+  "plugin": [
+    ["github:gmammolo/opencode-timestamps", { "maxRows": 10 }]
+  ]
 }
 ```
 
-Restart OpenCode.
+Options can be omitted to use defaults:
+
+```json
+{
+  "plugin": [
+    "github:gmammolo/opencode-timestamps"
+  ]
+}
+```
+
+Restart OpenCode. On first launch OpenCode clones the repository and caches it under `~/.cache/opencode/packages/`.
 
 ### Local checkout (dev)
 
 ```bash
-git clone https://github.com/<you>/opencode-timestamps.git
+git clone https://github.com/gmammolo/opencode-timestamps.git
 cd opencode-timestamps
 npm install
 ```
 
-Point OpenCode at the local folder instead of the npm package:
+Point OpenCode at the local folder instead of the GitHub repo:
 
 ```json
 {
-  "plugin": ["file:/path/to/opencode-timestamps"]
+  "plugin": [
+    ["file:/path/to/opencode-timestamps", { "maxRows": 10 }]
+  ]
 }
 ```
 
@@ -76,16 +87,24 @@ Options are passed as a `[plugin, options]` tuple in your TUI config (`~/.config
 ```json
 {
   "plugin": [
-    ["opencode-timestamps", { "maxRows": 10 }]
+    ["github:gmammolo/opencode-timestamps", { "maxRows": 10 }]
   ]
 }
 ```
 
-| Option    | Type    | Default | Description                                          |
-| --------- | ------- | ------- | ---------------------------------------------------- |
-| `maxRows` | number  | `10`    | How many of the most recent operations to display.   |
+| Option    | Type   | Default | Description                                      |
+| --------- | ------ | ------- | ------------------------------------------------ |
+| `maxRows` | number | `10`    | How many of the most recent operations to show.  |
 
 Restart OpenCode after changing the config.
+
+## Updating
+
+The GitHub clone is cached and is **not** re-fetched automatically. After pushing changes to the repo, clear the cache and restart OpenCode:
+
+```bash
+rm -rf ~/.cache/opencode/packages/github:gmammolo/opencode-timestamps
+```
 
 ## How it works
 
