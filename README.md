@@ -108,9 +108,10 @@ rm -rf ~/.cache/opencode/packages/github:gmammolo/opencode-timestamps
 
 ## How it works
 
-- TUI-only plugin: `exports["./tui"]` points at raw `src/tui.tsx`, which OpenCode compiles through its Bun preload (no build step needed).
+- TUI-only plugin: `exports["./tui"]` points at raw `src/tui.tsx`, which the OpenCode TUI compiles on the fly (no build step needed).
 - Registers the `sidebar_content` slot for the active session.
 - Reads `api.state.session.messages(sessionID)` + `api.state.part(messageID)` and subscribes to `message.part.updated` / `message.updated` for live re-renders.
+- The runtime imports (`solid-js`, `@opentui/solid/jsx-runtime`) are resolved **from disk at the install location** when the TUI imports the plugin, so the package declares them as production `dependencies`. When installed from npm/GitHub this is automatic; for a local `file:` install run `npm install` in the plugin folder first.
 
 ## Development
 
